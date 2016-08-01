@@ -1,0 +1,8 @@
+{
+  "name": "lamlib",
+  "description": "Lambda functions library",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::YOUR-ACCOUNT-ID:role/lamlib_lambda_function",
+  "environment": {}
+}
