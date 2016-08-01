@@ -1,0 +1,26 @@
+{
+  "name": "lamlib-ses-forwarder",
+  "version": "0.0.1",
+  "description": "Mail forwarder from SES to another",
+  "main": "index.js",
+  "engines": {
+    "node": "4.3.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kouhei-fuji/lamlib.git"
+  },
+  "keywords": [
+    "lambda",
+    "ses"
+  ],
+  "author": "Kouhei Fujigaya <kouhei.fujigaya@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kouhei-fuji/lamlib/issues"
+  },
+  "homepage": "https://github.com/kouhei-fuji/lamlib#readme"
+}
