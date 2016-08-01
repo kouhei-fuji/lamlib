@@ -1,3 +1,4 @@
+*.log
 .envrc
 project.json
 node_modules
