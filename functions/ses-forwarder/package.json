@@ -7,7 +7,9 @@
     "node": "4.3.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "copy-package": "mkdir -p build && cp package.json build/",
+    "compile": "babel . -d build --ignore build,node_modules",
+    "build": "rm -rf build && npm run copy-package && npm run compile && cd build && npm i --production"
   },
   "repository": {
     "type": "git",
