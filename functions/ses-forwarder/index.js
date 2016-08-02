@@ -17,7 +17,7 @@ const createMessage = received_mail => {
       subject: received_mail.subject,
       text: received_mail.text,
       html: received_mail.html,
-      attachments: received_mail.attachments.map(attachment => {
+      attachments: (received_mail.attachments || []).map(attachment => {
         const attachment_args = {
           filename: attachment.fileName,
           cid: attachment.contentId,
