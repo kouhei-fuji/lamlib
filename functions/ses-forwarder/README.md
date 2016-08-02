@@ -9,7 +9,7 @@ The function is mail forwarder from SES to another.
 ## Environment Variables
 
 - `FROM_EMAIL`: Verified email address on SES
-- `TO_EMAIL`: Forwarding destination
+- `TO_EMAIL`: Forwarding destination (Set it: `you@gmail.com`, Get by: `info@your-domain.com` => Forward for: `you+info@gmail.com`)
 - `SES_REGION`: Defaults `us-west-2` (Oregon)
 
 ## Deploy
@@ -47,5 +47,4 @@ You can also exec other commands in other directory. (see [Apex details](http://
 
 ## TODO
 
-- Add `To` and `Cc` informations in original message into forwarded message
-- Switch the transmission destination by `TO` of original message
+- Add `Cc` informations in original message into forwarded message

@@ -2,15 +2,15 @@ import AWS from 'aws-sdk'
 import { MailParser } from 'mailparser'
 import mailcomposer from 'mailcomposer'
 
-const FROM_EMAIL = process.env.FROM_EMAIL
-const TO_EMAIL   = process.env.TO_EMAIL
-const SES_REGION = process.env.SES_REGION || 'us-west-2' // defaults: Oregon
+const FROM_EMAIL = process.env.FROM_EMAIL,
+      TO_EMAIL   = process.env.TO_EMAIL,
+      SES_REGION = process.env.SES_REGION || 'us-west-2' // defaults: Oregon
 
-const createMessage = received_mail => {
+const createMessage = (received_mail, to_email) => {
   return new Promise((resolve, reject) => {
     const source = {
       from: FROM_EMAIL, // fixed
-      to: TO_EMAIL,     // fixed
+      to: to_email,     // fixed
       replyTo: received_mail.from,
       inReplyTo: received_mail.inReplyTo,
       references: received_mail.references,
@@ -55,20 +55,6 @@ const sendMessage = ses_params => {
 export default (event, context, callback) => {
   console.log('processing_event:%j', event);
 
-  const mailparser = new MailParser()
-  mailparser.on('end', received_mail => {
-    createMessage(received_mail)
-    .then(sendMessage)
-    .then(data => {
-      console.log(data)
-      callback(null, data)
-    })
-    .catch(err => {
-      console.log(err)
-      callback(err)
-    })
-  });
-
   (event.Records || []).map(record => {
     if (!record.s3) {
       console.log('invalid_record')
@@ -82,6 +68,28 @@ export default (event, context, callback) => {
       Bucket: bucket,
       Key: key
     }
+
+    // Switch `TO_EMAIL` by received email address
+    // e.g.
+    //   Get: info@your-domain.com, TO_EMAIL: you@gmail.com
+    //   Forward for: you+info@gmail.com
+    let to_email = TO_EMAIL.split('@')
+    to_email.splice(1, 0, `+${key.split('/')[0]}`, '@')
+    to_email = to_email.join('')
+
+    const mailparser = new MailParser()
+    mailparser.on('end', received_mail => {
+      createMessage(received_mail, to_email)
+      .then(sendMessage)
+      .then(data => {
+        console.log(data)
+        callback(null, data)
+      })
+      .catch(err => {
+        console.log(err)
+        callback(err)
+      })
+    })
 
     const s3 = new AWS.S3({ apiVersion: '2006-03-01' })
     s3.getObject(params).promise()
