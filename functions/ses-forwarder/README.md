@@ -14,12 +14,33 @@ The function is mail forwarder from SES to another.
 
 ## Deploy
 
-in project root:
+*This function includes `iconv`, so that you should build/deploy on ami-f0091d91 EC2 (see [Lambda Execution Environment and Available Libraries](http://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html))*
 
-    $ apex deploy --region $SES_REGION --set FROM_EMAIL=$FROM_EMAIL --set TO_EMAIL=$TO_EMAIL --set SES_REGION=$SES_REGION ses-forwarder
+Setup on EC2 (ami-f0091d91):
 
-or somewhere:
+```
+$ sudo su -
+# curl https://raw.githubusercontent.com/apex/apex/master/install.sh | sh
+# apex upgrade
+# NODE_VERSION=4.3.2
+# NODE_DOWNLOAD_SHA256=f307f173a96dff6652bc70d835af0c732864bb09875cf32a0b6ce7d70cebf77d
+# cd /usr/local/src \
+    && curl -O https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz \
+    && echo ${NODE_DOWNLOAD_SHA256} node-v${NODE_VERSION}-linux-x64.tar.gz | sha256sum -c - \
+    && tar xf node-v${NODE_VERSION}-linux-x64.tar.gz -C /usr/local --strip-components=1 \
+    && rm -rf /usr/local/src/node-v${NODE_VERSION}-linux-x64.tar.gz
+# exit
+$ sudo yum -y install git gcc-c++ && sudo yum clean all
+$ git clone https://github.com/kouhei-fuji/lamlib.git
+$ cd lamlib/functions/ses-forwarder && npm i
+```
 
-    $ apex deploy --region $SES_REGION -C /path/to/project-root --set FROM_EMAIL=$FROM_EMAIL --set TO_EMAIL=$TO_EMAIL --set SES_REGION=$SES_REGION ses-forwarder
+Upload ses-forwarder function to Lambda:
 
-You can also exec other commands as above. (see [Apex details](http://apex.run/#examples).)
+```
+$ pwd
+/path/to/lamlib/functions/ses-forwarder
+$ apex deploy -C ../.. --region $SES_REGION --set FROM_EMAIL=$FROM_EMAIL --set TO_EMAIL=$TO_EMAIL --set SES_REGION=$SES_REGION ses-forwarder
+```
+
+You can also exec other commands in other directory. (see [Apex details](http://apex.run/#examples))
