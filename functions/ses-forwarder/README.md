@@ -12,6 +12,28 @@ The function is mail forwarder from SES to another.
 - `TO_EMAIL`: Forwarding destination (Set it: `you@gmail.com`, Get by: `info@your-domain.com` => Forward for: `you+info@gmail.com`)
 - `SES_REGION`: Defaults `us-west-2` (Oregon)
 
+## AWS Setup
+
+### S3
+
+Create domain dedicated S3 bucket.
+
+### SES
+
+1. Create Email Receiving Rule Set of each email address
+1. Add S3 action
+  1. Select created S3 bucket
+  1. Set object key prefix by receiver (if your want to receive `info@your-domain.com`, set `info/`)
+
+### Lambda
+
+1. Select created function
+1. Select `current` alias
+1. Add `trigger`
+  1. Select `S3`
+  1. Select created S3 bucket
+  1. Event type to `Put`
+
 ## Deploy
 
 *This function includes `iconv`, so that you should build/deploy on ami-f0091d91 EC2 (see [Lambda Execution Environment and Available Libraries](http://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html))*
