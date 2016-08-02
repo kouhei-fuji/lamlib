@@ -44,3 +44,8 @@ $ apex deploy -C ../.. --region $SES_REGION --set FROM_EMAIL=$FROM_EMAIL --set T
 ```
 
 You can also exec other commands in other directory. (see [Apex details](http://apex.run/#examples))
+
+## TODO
+
+- Add `To` and `Cc` informations in original message into forwarded message
+- Switch the transmission destination by `TO` of original message
