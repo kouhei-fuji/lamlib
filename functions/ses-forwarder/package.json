@@ -1,6 +1,6 @@
 {
   "name": "lamlib-ses-forwarder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mail forwarder from SES to another",
   "main": "index.js",
   "engines": {
