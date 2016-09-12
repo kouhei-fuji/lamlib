@@ -17,7 +17,7 @@ $ vim project.json
 
 ## Functions
 
-- [ses-forwarder](functions/ses-forwarder): Mail forwarder from SES to another
+- [ses-forwarder](tree/master/functions/ses-forwarder): Mail forwarder from SES to another
 
 ## License
 
