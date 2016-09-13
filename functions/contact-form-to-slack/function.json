@@ -1,0 +1,7 @@
+{
+  "description": "Lamlib for contact form to Slack",
+  "runtime": "nodejs4.3",
+  "handler": "build.default",
+  "memory": 128,
+  "timeout": 5
+}

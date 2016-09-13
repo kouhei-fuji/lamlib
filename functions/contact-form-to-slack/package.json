@@ -1,0 +1,24 @@
+{
+  "name": "contact-form-to-slack",
+  "version": "0.0.1",
+  "description": "Contact form json to Slack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kouhei-fuji/lamlib.git"
+  },
+  "keywords": [
+    "lambda",
+    "sns",
+    "slack"
+  ],
+  "author": "Kouhei Fujigaya <kouhei.fujigaya@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kouhei-fuji/lamlib/issues"
+  },
+  "homepage": "https://github.com/kouhei-fuji/lamlib#readme"
+}
