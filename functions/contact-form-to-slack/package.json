@@ -35,5 +35,8 @@
     "presets": [
       "es2015"
     ]
+  },
+  "dependencies": {
+    "axios": "^0.14.0"
   }
 }
