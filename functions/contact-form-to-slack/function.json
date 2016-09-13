@@ -3,5 +3,9 @@
   "runtime": "nodejs4.3",
   "handler": "build.default",
   "memory": 128,
-  "timeout": 5
+  "timeout": 5,
+  "hooks": {
+    "build": "npm run build",
+    "clean": "rm -rf build"
+  }
 }

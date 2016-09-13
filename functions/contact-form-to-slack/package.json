@@ -3,8 +3,13 @@
   "version": "0.0.1",
   "description": "Contact form json to Slack",
   "main": "index.js",
+  "engines": {
+    "node": "4.3.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "copy-package": "mkdir -p build && cp package.json build/",
+    "compile": "babel . -d build --ignore build,node_modules",
+    "build": "rm -rf build && npm run copy-package && npm run compile && cd build && npm i --production"
   },
   "repository": {
     "type": "git",
@@ -25,5 +30,10 @@
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
     "babel-preset-es2015": "^6.14.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   }
 }
