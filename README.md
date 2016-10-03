@@ -17,8 +17,8 @@ $ vim project.json
 
 ## Functions
 
-- [ses-forwarder](https://github.com/kouhei-fuji/lamlib/tree/master/functions/ses-forwarder): Mail forwarder from SES to another
-- [contact-form-to-slack](https://github.com/kouhei-fuji/lamlib/tree/master/functions/contact-form-to-slack): Contact form json to Slack
+- [ses-forwarder](functions/ses-forwarder): Mail forwarder from SES to another
+- [contact-form-to-slack](functions/contact-form-to-slack): Contact form json to Slack
 
 ## License
 
