@@ -23,10 +23,10 @@ const generateSlackMessage = (jsonString) => {
         pretext: `[${APP_NAME}] Contact Arrival`,
         text: json.Message,
         fields: Object.keys(json).filter(key => key != 'Message').map(key => {
-          return({
+          return {
             title: key,
             value: json[key]
-          })
+          }
         }),
         footer: APP_NAME,
         ts: Math.floor(new Date(json.Date || new Date()).getTime() / 1000)
@@ -40,15 +40,21 @@ export default (event, context, callback) => {
 
   return Promise.all((event.Records || []).map(record => {
     if (!record.Sns) {
-      console.log('invalid_record', record)
+      console.log('invalid_record:', record)
       return Promise.reject(JSON.stringify(record))
     }
 
     return(
       axios.post(SLACK_WEBHOOK_URL, generateSlackMessage(record.Sns.Message), config)
-      .then(res => { return res.status })
+      .then(res => res.statusText)
     )
   }))
-  .then(statuses => callback(null, JSON.stringify(statuses)))
-  .catch(err => callback(err))
+  .then(statuses => {
+    console.log('success:', statuses)
+    callback(null, statuses)
+  })
+  .catch(err => {
+    console.log('failure:', err)
+    callback(err)
+  })
 }
