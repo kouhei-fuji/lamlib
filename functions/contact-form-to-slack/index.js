@@ -21,7 +21,8 @@ const generateSlackMessage = (jsonString) => {
         fallback: `[${APP_NAME}] Contact Arrival`,
         color: '#d3d3d3',
         pretext: `[${APP_NAME}] Contact Arrival`,
-        fields: Object.keys(json).map(key => {
+        text: json.Message,
+        fields: Object.keys(json).filter(key => key != 'Message').map(key => {
           return({
             title: key,
             value: json[key]
