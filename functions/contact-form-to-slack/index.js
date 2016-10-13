@@ -35,7 +35,7 @@ const generateSlackMessage = (jsonString) => {
 }
 
 export default (event, context, callback) => {
-  console.log('processing_event:%j', event)
+  console.log('processing_event:', event)
 
   return Promise.all((event.Records || []).map(record => {
     if (!record.Sns) {
